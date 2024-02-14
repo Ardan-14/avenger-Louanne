@@ -19,7 +19,7 @@ class MarquePageController extends AbstractController
             'marque_pages' => $marque_pages,
         ]);
 	}
-	#[Route("/marque/ajouter", name: "livre_ajouter")]
+	#[Route("/marque/ajouter", name: "marque_ajouter")]
 	public function ajouterMarque(EntityManagerInterface $entityManager): Response
 	{
 		$marque_pages = new MarquePage();
@@ -32,4 +32,19 @@ class MarquePageController extends AbstractController
 
 		return new Response("Marque page sauvegardé avec l'id ". $marque_pages->getId());
 	}
+	#[Route("/marque/fiche/{id<\d+>}", name: "marque_fiche")]
+	public function afficherMarque(int $id, EntityManagerInterface $entityManager): Response
+	{
+		$marque_pages = $entityManager->getRepository(MarquePage::class)->find($id);
+		// Ne pas oublier de verifier que l'objet existe !
+		if (!$marque_pages) {
+			throw $this->createNotFoundException(
+			"Aucun marque page avec l'id ". $id
+			);
+		}
+		return $this->render('marque_page/fiche.html.twig', [
+            'marque_pages' => $marque_pages,
+        ]);
+	}
+
 }

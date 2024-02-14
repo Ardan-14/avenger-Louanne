@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Calibri', sans-serif;
+    }
+    h1{
+        color: white;
+    }
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+    td {
+        color: white;
+        background-color: blue;
+    }
+    th {
+      background-color: #fff;
+    }
+</style>
+<div>
+    <h1>Fiche du marque pages {{ marque_pages.id }}</h1>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>url</th>
+            <th>date</th>
+            <th>commentaire</th>
+        </tr>
+            <tr>
+                <td>{{ marque_pages.id }}</td>
+                <td>{{ marque_pages.url }}</td>
+                <td>{{ marque_pages.DateDeCreation|date ("d/m/Y") }}</td>
+                <td>{{ marque_pages.commentaire }}</td>
+            </tr>
+    </table>
+</div>
+
+{% endblock %}
