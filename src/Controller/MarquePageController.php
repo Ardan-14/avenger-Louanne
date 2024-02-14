@@ -19,4 +19,17 @@ class MarquePageController extends AbstractController
             'marque_pages' => $marque_pages,
         ]);
 	}
+	#[Route("/marque/ajouter", name: "livre_ajouter")]
+	public function ajouterMarque(EntityManagerInterface $entityManager): Response
+	{
+		$marque_pages = new MarquePage();
+		$marque_pages->setUrl("https://www.ldlc.com/fiche/PB00590147.html");
+		$marque_pages->setDateDeCreation(new \DateTime());
+		$marque_pages->setCommentaire("mon future ordi ?");
+
+		$entityManager->persist($marque_pages);
+		$entityManager->flush();
+
+		return new Response("Marque page sauvegardé avec l'id ". $marque_pages->getId());
+	}
 }

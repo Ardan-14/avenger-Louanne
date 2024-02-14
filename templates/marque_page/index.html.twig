@@ -35,12 +35,14 @@
         <tr>
             <th>id</th>
             <th>url</th>
+            <th>date</th>
             <th>commentaire</th>
         </tr>
         {% for marque in marque_pages %}
             <tr>
                 <td>{{ marque.id }}</td>
                 <td>{{ marque.url }}</td>
+                <td>{{ marque.DateDeCreation|date ("d/m/Y") }}</td>
                 <td>{{ marque.commentaire }}</td>
             </tr>
         {% endfor %}
