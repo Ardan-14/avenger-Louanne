@@ -8,9 +8,10 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\MarquePage;
 use Doctrine\ORM\EntityManagerInterface;
 
+#[Route('/marque', requirements: ["_local" => "en|es|fr"], name: "marque_page_")]
 class MarquePageController extends AbstractController
 {
-    #[Route('/marque/page', name: 'app_marque_page')]
+    #[Route('/page', name: 'app_marque_page')]
     public function index(EntityManagerInterface $entityManager): Response
     {
     	$marque_pages = $entityManager->getRepository(MarquePage::class)->findAll();
@@ -19,7 +20,7 @@ class MarquePageController extends AbstractController
             'marque_pages' => $marque_pages,
         ]);
 	}
-	#[Route("/marque/ajouter", name: "marque_ajouter")]
+	#[Route("/ajouter", name: "marque_ajouter")]
 	public function ajouterMarque(EntityManagerInterface $entityManager): Response
 	{
 		$marque_pages = new MarquePage();
@@ -32,7 +33,7 @@ class MarquePageController extends AbstractController
 
 		return new Response("Marque page sauvegardé avec l'id ". $marque_pages->getId());
 	}
-	#[Route("/marque/fiche/{id<\d+>}", name: "marque_fiche")]
+	#[Route("/fiche/{id<\d+>}", name: "marque_fiche")]
 	public function afficherMarque(int $id, EntityManagerInterface $entityManager): Response
 	{
 		$marque_pages = $entityManager->getRepository(MarquePage::class)->find($id);
