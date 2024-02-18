@@ -23,12 +23,17 @@ class MarquePageController extends AbstractController
 	#[Route("/ajouter", name: "marque_ajouter")]
 	public function ajouterMarque(EntityManagerInterface $entityManager): Response
 	{
+		
+		$mots_cles = new MotsCles();
+		$mots_cles -> setMotCle("Luidgi");
+
 		$marque_pages = new MarquePage();
 		$marque_pages->setUrl("https://www.ldlc.com/fiche/PB00590147.html");
 		$marque_pages->setDateDeCreation(new \DateTime());
 		$marque_pages->setCommentaire("mon future ordi ?");
 
 		$entityManager->persist($marque_pages);
+		$entityManager->persist($mots_cles);
 		$entityManager->flush();
 
 		return new Response("Marque page sauvegardé avec l'id ". $marque_pages->getId());

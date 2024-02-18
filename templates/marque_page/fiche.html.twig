@@ -33,17 +33,25 @@
     <h1>Fiche du marque pages {{ marque_pages.id }}</h1>
     <table>
         <tr>
-            <th>id</th>
-            <th>url</th>
-            <th>date</th>
-            <th>commentaire</th>
+            <td>id</td>
+            <td>{{ marque_pages.id }}</td>
         </tr>
-            <tr>
-                <td>{{ marque_pages.id }}</td>
-                <td>{{ marque_pages.url }}</td>
-                <td>{{ marque_pages.DateDeCreation|date ("d/m/Y") }}</td>
-                <td>{{ marque_pages.commentaire }}</td>
-            </tr>
+        <tr>
+            <td>url</td>
+            <td>{{ marque_pages.url }}</td>
+        </tr>
+        <tr>
+            <td>date</td>
+            <td>{{ marque_pages.DateDeCreation|date ("d/m/Y") }}</td>
+        </tr>
+        <tr>
+            <td>commentaire</td>
+            <td>{{ marque_pages.commentaire }}</td>
+        </tr>
+        <tr>
+            <td>Mots clés</td>
+            <td>{{ marque_pages.MotsCles }}</td>
+        </tr>
     </table>
 </div>
 
