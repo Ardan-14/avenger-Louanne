@@ -41,7 +41,7 @@
         {% for marque in marque_pages %}
             <tr>
                 <td>{{ marque.id }}</td>
-                <td>{{ marque.url }}</td>
+                <td><a href="{{ path("marque_fiche", {id: marque_pages.id}) }} ">{{ marque.url }}</a></td>
                 <td>{{ marque.DateDeCreation|date ("d/m/Y") }}</td>
                 <td>{{ marque.commentaire }}</td>
             </tr>

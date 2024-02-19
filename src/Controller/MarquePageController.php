@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\MarquePage;
+use App\Entity\MotsCles;
 use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/marque', requirements: ["_local" => "en|es|fr"], name: "marque_page_")]
@@ -23,14 +24,15 @@ class MarquePageController extends AbstractController
 	#[Route("/ajouter", name: "marque_ajouter")]
 	public function ajouterMarque(EntityManagerInterface $entityManager): Response
 	{
-		
 		$mots_cles = new MotsCles();
-		$mots_cles -> setMotCle("Luidgi");
+		$mots_cles -> setMotCle("Luidgi Manson ?");
 
 		$marque_pages = new MarquePage();
 		$marque_pages->setUrl("https://www.ldlc.com/fiche/PB00590147.html");
 		$marque_pages->setDateDeCreation(new \DateTime());
 		$marque_pages->setCommentaire("mon future ordi ?");
+		$marque_pages->addMotCle($mots_cles);
+
 
 		$entityManager->persist($marque_pages);
 		$entityManager->persist($mots_cles);

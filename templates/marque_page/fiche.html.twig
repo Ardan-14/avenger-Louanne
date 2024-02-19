@@ -50,7 +50,11 @@
         </tr>
         <tr>
             <td>Mots clés</td>
-            <td>{{ marque_pages.MotsCles }}</td>
+            <td>
+                {% for mc in marque_pages.MotCle %}
+                    {{mc.MotCle}}
+                {% endfor %}
+            </td>
         </tr>
     </table>
 </div>
