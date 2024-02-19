@@ -1,0 +1,23 @@
+h1 {
+	display: flex;
+	justify-content: center;
+	color: white;
+}
+
+@media screen and (min-width:992px){
+      .nav-item {
+      line-height:80px;
+      }
+}
+
+nav {
+	background-color: white;
+}
+
+li {
+	color : #281942;
+}
+
+body {
+	background-color: #281942;
+}
