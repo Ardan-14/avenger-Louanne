@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block level3 %}
+<link rel="stylesheet" type="text/css" href='{{asset("css/level3.css")}}'>
+<div>
+    <h2>Liste des livres</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>titre</th>
+            <th>date de parution</th>
+            <th>nombre de pages</th>
+        </tr>
+        {% for livre in livres %}
+            <tr>
+                <td>{{ livre.id }}</td>
+                <td><a href="{{ path('livre_livre_fiche', { 'id': livre.id }) }}">{{ livre.titre }}</a></td>
+                <td>{{ livre.AnneeParution|date ("d/m/Y") }}</td>
+                <td>{{ livre.nbPage }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

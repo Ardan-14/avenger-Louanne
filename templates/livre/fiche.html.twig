@@ -30,34 +30,33 @@
     }
 </style>
 <div>
-    <h1>Fiche du marque pages {{ marque_pages.id }}</h1>
+    <h1>Fiche du livre {{ livres.id }}</h1>
     <table>
         <tr>
             <td>id</td>
-            <td>{{ marque_pages.id }}</td>
+            <td>{{ livres.id }}</td>
         </tr>
         <tr>
-            <td>url</td>
-            <td>{{ marque_pages.url }}</td>
+            <td>titre</td>
+            <td>{{ livres.titre }}</td>
         </tr>
         <tr>
-            <td>date</td>
-            <td>{{ marque_pages.DateDeCreation|date ("d/m/Y") }}</td>
-        </tr>
-        <tr>
-            <td>commentaire</td>
-            <td>{{ marque_pages.commentaire }}</td>
-        </tr>
-        <tr>
-            <td>Mots clés</td>
+            <td>Auteur</td>
             <td>
-                {% for mc in marque_pages.MotCle %}
-                    {{mc.MotCle}}
-                {% endfor %}
+                {{ livres.auteur.prenom }} {{ livres.auteur.nom }}
             </td>
         </tr>
+        <tr>
+            <td>date de parution</td>
+            <td>{{ livres.AnneeParution|date ("d/m/Y") }}</td>
+        </tr>
+        <tr>
+            <td>nombre de pages</td>
+            <td>{{ livres.nbPage }}</td>
+        </tr>
+
     </table>
-    <a href="{{ path("marque_page_app_marque_page") }} ">RETOUR</a>
+    <a href='{{ path("livre_app_livre") }}'>RETOUR</a>
 </div>
 
 {% endblock %}
