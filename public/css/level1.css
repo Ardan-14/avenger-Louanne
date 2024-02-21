@@ -3,6 +3,12 @@ h1 {
 	justify-content: center;
 	color: white;
 }
+h2 {
+	display: flex;
+	justify-content: center;
+	color: white;
+	margin: 20px;
+}
 
 @media screen and (min-width:992px){
       .nav-item {
@@ -21,3 +27,8 @@ li {
 body {
 	background-color: #281942;
 }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width : 100%;

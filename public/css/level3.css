@@ -27,3 +27,13 @@ th {
 a {
   color: white;
 }
+img.cailloux{
+  width: 50%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+

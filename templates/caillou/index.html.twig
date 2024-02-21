@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href='{{asset("css/button.css")}}'>
+{% endblock %}
+
+{% block level3 %}
+<div>
+    <h2>Les habitant du cailloux !</h2>
+    </br>
+    <div class="container">
+  <a class="button" href="#" style="--color:#1e9bff;">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Faune
+  </a>
+  <a class="button" href="{{ path('caillou_caillou_flore') }}" style="--color: #ff1867;">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    Flore
+  </a>
+</div>
+</br>
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href='{{asset("css/level3.css")}}'>
+{% endblock %}
+
+{% block level3 %}
+<div>
+    <h2>Les habitant du cailloux !</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>nom</th>
+            <th>nom scientifique</th>
+            <th>image</th>
+        </tr>
+        {% for caillou in cailloux %}
+            <tr>
+                <td>{{ caillou.id }}</td>
+                <td>{{ caillou.nom }}</td>
+                <td>{{ caillou.nomScientifique }}</td>
+                <td><img class="cailloux" src="{{ asset( caillou.img) }}" alt="buisson"></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</br>
+
+
+{% endblock %}
