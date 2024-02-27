@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Livre;
 use App\Entity\Auteur;
+use App\Repository\LivreRepository; 
 use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/livre', requirements: ["_local" => "en|es|fr"], name: "livre_")]
@@ -35,4 +36,33 @@ class LivreController extends AbstractController
             'livres' => $livres,
         ]);
 	}
+
+    #[Route("/auteurs/{nb<\d+>}", name: "livre_auteurslivres")]
+    public function auteursPlusDeLivres($nb, LivreRepository $livreRepository): Response
+    {
+        $auteurs = $livreRepository->FindAuteurByNbLivre($nb);
+        return $this->render('livre/auteur.html.twig', [
+            'auteurs' => $auteurs,
+            'nb' => $nb,
+        ]);
+    }
+
+    #[Route("/compter", name: "livre_compter")]
+    public function compter(LivreRepository $livreRepository): Response
+    {
+        $nbLivres = $livreRepository->getNbLivres();
+        return $this->render('livre/livrecompte.html.twig', [
+            'nbLivres' => $nbLivres,
+        ]);
+    }
+
+    #[Route("/titre/{lettre}", name: "livre_titrecommencepar")]
+    public function titreCommencePar($lettre, LivreRepository $livreRepository): Response
+    {
+        $livres = $livreRepository->getStartBy($lettre);
+        return $this->render('livre/lettre.html.twig', [
+            'livres' => $livres,
+            'lettre' => $lettre,
+        ]);
+    }
 }

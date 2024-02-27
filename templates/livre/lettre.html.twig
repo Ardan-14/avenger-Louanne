@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block level3 %}
+<link rel="stylesheet" type="text/css" href='{{ asset("css/level3.css") }}'>
+    <h2>Livres dont le titre commence par "{{ lettre }}" :</h2>
+    <ul>
+        {% for livre in livres %}
+            <li>{{ livre.titre }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

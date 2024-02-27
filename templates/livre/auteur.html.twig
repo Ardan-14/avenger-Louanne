@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block level3 %}
+<link rel="stylesheet" type="text/css" href='{{ asset("css/level3.css") }}'>
+<h2>
+    Voici les auteurs qui ont écrit plus de {{ nb }} livres :
+</h2>
+
+<ul>
+    {% for auteur in auteurs %}
+        <li>{{ auteur.nom }} ({{ auteur.NbLivres }} livres)</li>
+    {% endfor %}
+</ul>
+{% endblock %}
