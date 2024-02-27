@@ -35,16 +35,4 @@ class LivreController extends AbstractController
             'livres' => $livres,
         ]);
 	}
-
-	public function load(ObjectManager $manager)
-	 {
-		 for ($i = 0; $i < 15; $i++) {
-		 $livre = new Livre();
-		 $livre->setTitre('Livre '.$i);
-		 $livre->setAnneeParution(mt_rand(1975, 2020));
-		 $livre->setNbPage(mt_rand(45, 1500));
-		 $manager->persist($livre);
-		 }
-		 $manager->flush();
-	 }
 }

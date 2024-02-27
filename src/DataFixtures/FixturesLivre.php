@@ -7,7 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Livre;
 use App\Entity\Auteur;
 
-class MesFixtures extends Fixture
+class FixturesLivre extends Fixture
 {
     	public function load(ObjectManager $manager)
 	 {
@@ -20,10 +20,13 @@ class MesFixtures extends Fixture
 			 $livre->setTitre('Livre '.$i);
 			 $livre->setAnneeParution(new \DateTime(mt_rand(1975, 2020)));
 			 $livre->setNbPage(mt_rand(45, 1500));
+			 $livre->setAuteur($auteur);
 			 $manager->persist($livre);
 			 $manager->persist($auteur);
 		 }
-		 }
+		 
+
 		 $manager->flush();
+		}
 	 }
-}
+

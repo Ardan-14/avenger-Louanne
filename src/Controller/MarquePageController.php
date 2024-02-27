@@ -21,25 +21,7 @@ class MarquePageController extends AbstractController
             'marque_pages' => $marque_pages,
         ]);
 	}
-	#[Route("/ajouter", name: "marque_ajouter")]
-	public function ajouterMarque(EntityManagerInterface $entityManager): Response
-	{
-		$mots_cles = new MotsCles();
-		$mots_cles -> setMotCle("Luidgi Manson ?");
 
-		$marque_pages = new MarquePage();
-		$marque_pages->setUrl("https://www.ldlc.com/fiche/PB00590147.html");
-		$marque_pages->setDateDeCreation(new \DateTime());
-		$marque_pages->setCommentaire("mon future ordi ?");
-		$marque_pages->addMotCle($mots_cles);
-
-
-		$entityManager->persist($marque_pages);
-		$entityManager->persist($mots_cles);
-		$entityManager->flush();
-
-		return new Response("Marque page sauvegardé avec l'id ". $marque_pages->getId());
-	}
 	#[Route("/fiche/{id<\d+>}", name: "marque_fiche")]
 	public function afficherMarque(int $id, EntityManagerInterface $entityManager): Response
 	{
