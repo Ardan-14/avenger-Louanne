@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Livre;
 use App\Entity\Auteur;
 use App\Form\Type\LivreType;
+use App\Form\Type\AuteurType;
 use App\Repository\LivreRepository; 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,7 +73,7 @@ class LivreController extends AbstractController
     }
 
     #[Route("/ajout", name: "livre_ajout")]
-    public function ajout(Request $request, EntityManagerInterface $entityManager)
+    public function ajoutLivre(Request $request, EntityManagerInterface $entityManager)
     {
         // Création d’un objet Livre vierge
         $livre = new Livre();
@@ -96,6 +97,30 @@ class LivreController extends AbstractController
 
     #[Route('/succes', name: 'livre_succes')]
     public function succes(): Response
+    {
+        return $this->render('livre/succes.html.twig');
+    }
+
+    #[Route("/auteur/ajout", name: "auteur_ajout")]
+    public function ajoutAuteur(Request $request, EntityManagerInterface $entityManager)
+    {
+        // Création d’un objet Livre vierge
+        $auteur = new Auteur();
+        $form = $this->createForm(AuteurType::class, $auteur);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($auteur);
+            $entityManager->flush();
+            return $this->redirectToRoute('livre_auteur_succes');
+        }
+        return $this->render('livre/ajout.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    
+
+    #[Route('/auteur/succes', name: 'auteur_succes')]
+    public function succesAuteur(): Response
     {
         return $this->render('livre/succes.html.twig');
     }
