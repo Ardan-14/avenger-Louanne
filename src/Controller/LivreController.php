@@ -9,6 +9,7 @@ use App\Entity\Livre;
 use App\Entity\Auteur;
 use App\Form\Type\LivreType;
 use App\Form\Type\AuteurType;
+use App\Repository\AuteurRepository;
 use App\Repository\LivreRepository; 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,5 +125,30 @@ class LivreController extends AbstractController
     {
         return $this->render('livre/succes.html.twig');
     }
+
+    #[Route('/auteur/modifier/{id}', name: 'auteur_modifier')]
+    public function modifierAuteur(int $id, Request $request, EntityManagerInterface $entityManager, AuteurRepository $auteurRepository): Response
+    {
+        $auteur = $auteurRepository->find($id);
+        
+        if (!$auteur) {
+            throw $this->createNotFoundException("Auteur non trouvé avec l'identifiant : " . $id);
+        }
+
+        $form = $this->createForm(AuteurType::class, $auteur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('livre_auteur_succes', ['id' => $id]);
+        }
+
+        return $this->render('livre/modifier.html.twig', [
+            'form' => $form->createView(),
+            'auteur' => $auteur,
+        ]);
+    }
+
 
 }
