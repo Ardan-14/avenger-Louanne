@@ -7,8 +7,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Livre;
 use App\Entity\Auteur;
+use App\Form\Type\LivreType;
 use App\Repository\LivreRepository; 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Persistence\ManagerRegistry;
+
+
 
 #[Route('/livre', requirements: ["_local" => "en|es|fr"], name: "livre_")]
 class LivreController extends AbstractController
@@ -65,4 +70,34 @@ class LivreController extends AbstractController
             'lettre' => $lettre,
         ]);
     }
+
+    #[Route("/ajout", name: "livre_ajout")]
+    public function ajout(Request $request, EntityManagerInterface $entityManager)
+    {
+        // Création d’un objet Livre vierge
+        $livre = new Livre();
+        $form = $this->createForm(LivreType::class, $livre);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() : pour récupérer les données
+            // Les données sont déjà stockées dans la variable d’origine
+            // $livre = $form->getData();
+            // ... Effectuer le/les traitements(s) à réaliser
+            // Par exemple :
+            $entityManager->persist($livre);
+            $entityManager->flush();
+            return $this->redirectToRoute('livre_livre_succes');
+        }
+        return $this->render('livre/ajout.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    
+
+    #[Route('/succes', name: 'livre_succes')]
+    public function succes(): Response
+    {
+        return $this->render('livre/succes.html.twig');
+    }
+
 }

@@ -25,11 +25,11 @@ class LivreRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT a, count(l) AS NbLivres
+            'SELECT a as auteur, count(l) AS NbLivres
             FROM App\Entity\Auteur a 
             JOIN a.livres l 
             GROUP BY a.id
-            HAVING NbLivres > :nbLivre'
+            HAVING NbLivres >= :nbLivre'
         )->setParameter('nbLivre', $nbLivre);
 
         return $query->getResult();
