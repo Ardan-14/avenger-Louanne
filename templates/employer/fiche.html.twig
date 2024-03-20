@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block level3 %}
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Calibri', sans-serif;
+    }
+    h1{
+        color: white;
+    }
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+    td {
+        color: white;
+        background-color: blue;
+    }
+    th {
+      background-color: #fff;
+    }
+</style>
+<div>
+    <h1>Fiche de l'employé {{ employer.id }}</h1>
+    <table>
+        <tr>
+            <td>id</td>
+            <td>{{ employer.id }}</td>
+        </tr>
+        <tr>
+            <td>Nom</td>
+            <td>{{ employer.nom }}</td>
+        </tr>
+        <tr>
+            <td>Prénom</td>
+            <td>{{ employer.prenom }}</td>
+        </tr>
+        <tr>
+            <td>Adresse</td>
+            <td>{{ employer.adresse.Pays }}, {{ employer.adresse.Ville }}, {{ employer.adresse.Rue }}</td>
+        </tr>
+
+    </table>
+    <a href='{{ path("employer_app_employer") }}'>RETOUR</a>
+</div>
+
+{% endblock %}

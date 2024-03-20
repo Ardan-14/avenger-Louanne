@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block level3 %}
+<link rel="stylesheet" type="text/css" href='{{asset("css/level3.css")}}'>
+<div>
+    <h2>Liste des employés</h2>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>nom</th>
+            <th>prénom</th>
+        </tr>
+    {% for employer in employers %}
+        <tr>
+            <td>{{ employer.id }}</td>
+            <td><a href="{{ path('employer_employer_fiche', { 'id': employer.id }) }}">{{ employer.nom }}</a></td>
+            <td>{{ employer.prenom }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

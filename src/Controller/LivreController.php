@@ -94,6 +94,30 @@ class LivreController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/modifier/{id}', name: 'livre_modifier')]
+    public function modifierLivre(int $id, Request $request, EntityManagerInterface $entityManager, LivreRepository $livreRepository): Response
+    {
+        $livre = $livreRepository->find($id);
+
+        if (!$livre) {
+            throw $this->createNotFoundException("Livre non trouvé avec l'identifiant : " . $id);
+        }
+
+        $form = $this->createForm(LivreType::class, $livre);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('livre_livre_ajout_succes', ['id' => $id]);
+        }
+
+        return $this->render('livre/modifier.html.twig', [
+            'form' => $form->createView(),
+            'livre' => $livre,
+        ]);
+    }
     
 
     #[Route('/succes', name: 'livre_succes')]

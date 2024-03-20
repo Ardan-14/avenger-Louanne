@@ -26,6 +26,8 @@ class Livre
 
     #[ORM\ManyToOne( inversedBy: 'livres')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\Type(type:"App\Entity\Auteur")]
+    #[Assert\Valid]
     private ?Auteur $auteur = null;
 
     public function getId(): ?int

@@ -8,28 +8,22 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\Livre;
-use App\Entity\Auteur;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Adresse;
 
-class LivreType extends AbstractType
+class AdresseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre', TextType::class)
-            ->add('anneeParution', DateType::class)
-            ->add('nbPage', IntegerType::class)
-            ->add('auteur', EntityType::class , [
-                'class' => Auteur::class
-            ])
+            ->add('pays', TextType::class)
+            ->add('ville', TextType::class)
+            ->add('rue', TextType::class)
             ->add('valider', SubmitType::class);
     }
         // Ici, on défini de manière explicite le « data_class »
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => Livre::class,]);
+        $resolver->setDefaults(['data_class' => Adresse::class,]);
     }
 }
 
